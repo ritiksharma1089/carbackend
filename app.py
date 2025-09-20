@@ -8,7 +8,7 @@ import numpy as np
 # Initialize Flask app
 app = Flask(__name__)
 CORS(app)
-
+# Allow CORS for all domains (for development; restrict in production)
 # Load trained model
 model = pickle.load(open('LinearRegressionModel.pkl', 'rb'))
 
