@@ -28,15 +28,17 @@ def predict():
 
     # Create DataFrame for prediction
     input_df = pd.DataFrame(
-        columns=['name', 'company', 'year', 'kms_driven', 'fuel_type'],
-        data=np.array([
-            data['car_model'],
-            data['company'],
-            data['year'],
-            data['kms_driven'],
-            data['fuel_type']
-        ]).reshape(1, 5)
-    )
+    columns=['Unnamed: 0', 'name', 'company', 'year', 'kms_driven', 'fuel_type'],
+    data=np.array([
+        data.get('Unnamed: 0', 0),  # default 0 if not sent
+        data['car_model'],
+        data['company'],
+        data['year'],
+        data['kms_driven'],
+        data['fuel_type']
+    ]).reshape(1, 6)
+)
+
 
     # Predict
     prediction = model.predict(input_df)[0]
