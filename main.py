@@ -8,9 +8,9 @@ import numpy as np
 # Initialize Flask app
 app = Flask(__name__)
 CORS(app)
-# Allow CORS for all domains (for development; restrict in production)
+
 # Load trained model
-model = pickle.load(open('LinearRegressionModel2.pkl', 'rb'))
+model = pickle.load(open('LinearRegressionModel.pkl', 'rb'))
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -37,6 +37,9 @@ def predict():
             data['fuel_type']
         ]).reshape(1, 5)
     )
+
+    # Add dummy Unnamed: 0 column
+    input_df["Unnamed: 0"] = 0
 
     # Predict
     prediction = model.predict(input_df)[0]
